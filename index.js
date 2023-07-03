@@ -60,7 +60,35 @@ function riotAPIListener (){
                             var domData = data.info.participants;
                             domData = domData.filter(a => a.puuid == process.env.PUUID);
                             var win = domData[0].win ? 'won' : 'lost'
-                            channel.send(`Dom ${win} his latest game as ${domData[0].championName}.`)
+                             const giphy = {
+                        baseURL: "https://api.giphy.com/v1/gifs/",
+                        apiKey: "0UTRbFtkMxAplrohufYco5IY74U8hOes",
+                        tag: "sad",
+                        type: "random",
+                        rating: "pg-13"
+                    };
+                    // Giphy API URL
+                    let giphyURL = encodeURI(
+                        giphy.baseURL +
+                        giphy.type +
+                        "?api_key=" +
+                        giphy.apiKey +
+                        "&tag=" +
+                        giphy.tag +
+                        "&rating=" +
+                        giphy.rating
+                    );
+                    var urlLink;
+                    fetch(giphyURL)
+                        .then(response =>{
+                            return response.json();
+                        })
+                        .then(url =>{
+                            console.log(url)
+                            urlLink = url.data.embed_url;
+                        })
+
+                            channel.send(`Dom ${win} his latest game as ${domData[0].championName} and went ${domData[0].kills}/${domData[0].deaths}/${domData[0].assists}. ${urlLink}`)
                         })
                 }
             })
