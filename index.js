@@ -54,7 +54,7 @@ client.on('messageCreate',(message) =>{
                         .then(url =>{
                             console.log(url)
                             urlLink = url.data.embed_url;
-                            channel.send(`Dom ${win} his latest game as ${domData[0].championName} and went ${domData[0].kills}/${domData[0].deaths}/${domData[0].assists}. ${urlLink}`)
+                            message.reply(`Dom ${win} his latest game as ${domData[0].championName} and went ${domData[0].kills}/${domData[0].deaths}/${domData[0].assists}. ${urlLink}`)
                         })
                 })
         })
